@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Отображение новых эмодзи для Windows 10",
+  "version": "1.0.0",
+  "description": "Заменяет отсутствующие в Windows 10 современные эмодзи (Unicode 13-16) на картинки. Поддерживает новые эмодзи: сердце-руки, растение в горшке, бабл-ти и другие.",
+  "author": "Vova-iz-Tambova",
+  "homepage_url": "https://github.com/Vova-iz-Tambova/windows-10-emoji-square-fixer",
+  "permissions": [],
+  "host_permissions": ["<all_urls>"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
