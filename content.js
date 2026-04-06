@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Отображение новых эмодзи для Windows 10
 // @namespace    https://github.com/Vova-iz-Tambova/windows-10-emoji-square-fixer
-// @version      1.0.0
-// @description  Заменяет отсутствующие в Windows 10 современные эмодзи (Unicode 13-16) на актуальные картинки Twemoji. Поддерживает новые эмодзи: сердце-руки, растение в горшке, бабл-ти и другие.
+// @version      1.0.2
+// @description  Заменяет отсутствующие в Windows 10 современные эмодзи (Unicode 13-16) на актуальные картинки Twemoji 15.0.3. Поддерживает новые эмодзи: сердце-руки, растение в горшке, бабл-ти и другие. Исправлено отображение эмодзи 🤌 и 🩷.
 // @author       Vova-iz-Tambova
 // @homepageURL  https://github.com/Vova-iz-Tambova/windows-10-emoji-square-fixer
 // @supportURL   https://github.com/Vova-iz-Tambova/windows-10-emoji-square-fixer/issues
@@ -15,11 +15,11 @@
     'use strict';
 
     // Регулярное выражение для поиска современных эмодзи (Unicode 13+)
-    const modernEmojiRegex = /[\u{1FA70}-\u{1FAFF}\u{1F9B0}-\u{1F9FF}\u{1FAD0}-\u{1FAFF}\u{1FBC0}-\u{1FBFF}]/gu;
+    const modernEmojiRegex = /[\u{1F900}-\u{1F9FF}\u{1FA70}-\u{1FAFF}]/gu;
 
     function getTwemojiUrl(emoji) {
         const codePoint = emoji.codePointAt(0).toString(16);
-        return `https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/${codePoint}.svg`;
+        return `https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/svg/${codePoint}.svg`;
     }
 
     function replaceMissingEmojis() {
@@ -53,7 +53,7 @@
             newHtml = newHtml.replace(modernEmojiRegex, (match) => {
                 const imgUrl = getTwemojiUrl(match);
                 changed = true;
-                return `<img src="${imgUrl}" alt="${match}" style="height: 1.2em; width: 1.2em; vertical-align: middle; display: inline-block;" onerror="this.style.display='none'">`;
+                return `<img src="${imgUrl}" alt="${match}" title="${match}" style="height: 1.2em; width: 1.2em; vertical-align: middle; display: inline-block;" onerror="this.style.display='none'">`;
             });
 
             if (changed) {
