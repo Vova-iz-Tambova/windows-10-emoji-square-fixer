@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Отображение новых эмодзи для Windows 10
 // @namespace    https://github.com/Vova-iz-Tambova/windows-10-emoji-square-fixer
-// @version      1.1.2
-// @description  Заменяет ТОЛЬКО отсутствующие в Windows 10 эмодзи (Unicode 13-15.1). Старые эмодзи не трогает.
+// @version      1.1.3
+// @description  Заменяет отсутствующие в Windows 10 эмодзи на картинки Twemoji 15.1.0
 // @author       Vova-iz-Tambova
 // @homepageURL  https://github.com/Vova-iz-Tambova/windows-10-emoji-square-fixer
 // @supportURL   https://github.com/Vova-iz-Tambova/windows-10-emoji-square-fixer/issues
@@ -16,9 +16,8 @@
 
     const skinToneModifiers = ['🏻', '🏼', '🏽', '🏾', '🏿'];
     
-    // ТОЛЬКО новые эмодзи (Unicode 13+), которые Windows 10 НЕ поддерживает
-    // Диапазоны: транспортные (новые), дополнительные смайлы, новые эмодзи 2020-2024
-    const modernEmojiRegex = /[\u{1F680}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{1FA70}-\u{1FAFF}]/gu;
+    // Широкий диапазон новых эмодзи, исключая старых животных (U+1F980–U+1F98F)
+    const modernEmojiRegex = /[\u{1F680}-\u{1F6FF}\u{1F900}-\u{1F97F}\u{1F990}-\u{1F9FF}\u{1FA70}-\u{1FAFF}]/gu;
 
     function getTwemojiUrl(emoji) {
         const codePoint = emoji.codePointAt(0).toString(16);
